@@ -1,0 +1,103 @@
+/*.form-check-input:focus {*/
+/*    border-color: grey;!important*/
+/*outline: 0;*/
+/*    box-shadow: 0 0 0 0.01rem #43a097;!important*/
+/*}*/
+/*.form-check-input:checked {*/
+/*    background-color: #4dbeb4; !important*/
+/*    border-color: red; !important;*/
+/*}*/
+
+
+
+
+.btn-primary {
+    color: #000000;
+    background-color: rgba(223,194,125,0.6);
+    border-color: rgb(223, 194, 125);
+
+}
+.btn-primary:hover {
+    color: #000000;
+    background-color: rgba(223, 194, 125, 0.8);
+    border-color: rgb(150, 122, 65);
+}
+
+.btn-check:focus + .btn-primary, .btn-primary:focus {
+    color: #000000;
+    background-color: rgba(223, 194, 125, 0.8);
+    border-color: rgb(150, 122, 65);
+    box-shadow: 0 0 0 0.25rem rgb(150, 122, 65);
+}
+
+.btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+    color: #000000;
+    background-color: rgba(223, 194, 125, 0.8);
+    border-color: rgb(150, 122, 65);
+}
+.btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.25rem rgb(150, 122, 65);
+}
+.btn-primary:disabled, .btn-primary.disabled {
+    color: #000000;
+    background-color: rgba(223, 194, 125, 0.8);
+    border-color: rgb(150, 122, 65);
+}
+
+
+.btn-secondary {
+    color: #000000;
+    background-color: rgba(94,177,191,0.7);
+    border-color: rgb(94, 177, 191);
+
+}
+.btn-secondary:hover {
+    color: #000000;
+    background-color: rgba(94,177,191,0.9);
+    border-color: rgba(41, 84, 91, 0.54);
+}
+
+
+
+#sw-switch-container input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+#sw-switch-container label {
+    cursor: pointer;
+    width: 2vw;
+    height: 1.2vh;
+    background: grey;
+    display: block;
+    border-radius: 25px;
+    position: relative;
+    top: 1.5vh;
+}
+
+/*inner circle*/
+#sw-switch-container label:after {
+    content: '';
+    position: absolute;
+    top: 0.1vh;
+    left: 0.1vw;
+    width: 1.5vh;
+    height: 1vh;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.5s;
+}
+
+#sw-switch-container input:checked + label {
+    background: #43a097;
+}
+
+#sw-switch-container input:checked + label:after {
+    left: calc(100% - 1px);
+    transform: translateX(-100%);
+}
+
+#sw-switch-container label:active:after {
+    width: 0vw;
+}

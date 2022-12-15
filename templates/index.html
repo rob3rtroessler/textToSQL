@@ -1,0 +1,294 @@
+<html>
+    <head>
+        <title>txtToSQL</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+        <!-- google font -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:200,200i,300,300i,400,400i,500,500i" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Rock+Salt"/>
+
+        <!-- libs-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/nouislider.css') }}">
+
+        <!-- own styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/grid.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/sliders.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons-and-switches.css') }}">
+
+    </head>
+
+
+    <body>
+        <!-- Wrapper for entire App -->
+        <div class="container-fluid" id="app" style="padding-top: 1vh; padding-bottom: 1vh; padding-left: 3vw; padding-right: 3vw; height: 100vh;">
+
+            <div class="container-fluid color-0" style="border: thin solid black; border-radius: 5px;">
+
+
+                <!-- HEADING -->
+                <div class="row" id="app-heading" style="height: 10vh; padding-left: 0.5vw; padding-bottom: 0.25vh; padding-right: 0.5vw; padding-top: 1vh">
+                    <div class="col color-1 box" style="border: thin solid #215f5b; border-radius: 5px;">
+                        <div class="row" style="height: 100%">
+                            <div class="col-3">
+                                <div class="row justify-content-center" style="height: 100%;">
+<!--                                    <img class="align-self-center" id="twitter-icon" src="{{ url_for('static', filename='img/logo.png') }}" style="display: block; max-height:80%; width: auto; height: auto;">-->
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row justify-content-center" style="height: 100%">
+                                    <div class="align-self-center">
+                                        <h1 style="text-align: center">Text to SQL</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="row justify-content-center" style="height: 100%">
+                                    <div class="align-self-end">
+                                        <h4 style="text-align: right">By: JEM-3 BERT</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- INPUT -->
+                <div class="row" id="app-body" style="height: 35vh;">
+
+                    <!-- INPUT -->
+                    <div class="col-6">
+
+                        <!-- Input Heading -->
+                        <div class="row" id="input-tab-wrapper">
+                            <div class="col box">
+                                <div class="row justify-content-center" id="input-tab" style="height: 100%;">
+                                    <span class="align-self-center" style="text-align: center">input</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Input Form Group -->
+                        <div class="row" id="input-body-wrapper">
+                            <div class="col color-2 box">
+                                <div class="row" style="height: 100%; border: thin solid grey; border-radius: 5px">
+                                    <div class="col">
+                                        <div class="row justify-content-center" style="height: 35%">
+                                            <div class="input-group input-group-sm align-self-center">
+                                                <span class="input-group-text"  style="background: rgba(223,194,125,0.6);">Select a data set:</span>
+                                                <select class="form-select" aria-label="Default select example" id="dataSetSelector" onchange="showDataSet()">
+                                                    <option selected>...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center" style="height: 35%">
+                                            <div class="input-group input-group-sm align-self-center">
+                                                <span class="input-group-text" id="inputGroup-sizing-lg" style="background: rgba(223,194,125,0.6);">Your Question?</span>
+                                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" id="inputString">
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center" style="height: 30%">
+                                            <div class="align-self-center" style="text-align: center">
+                                                <button type="button" class="btn btn-outline-primary btn-primary btn-sm" onclick="generateQuery()">submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DATA SET EXPLORER -->
+                    <div class="col-6">
+
+                        <!-- Data Set Heading -->
+                        <div class="row" id="dataset-tab-wrapper">
+                            <div class="col box">
+                                <div class="row justify-content-center" id="dataset-tab" style="height: 100%;">
+                                    <span class="align-self-center" style="text-align: center">data set</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row" id="dataset-body-wrapper">
+                            <div class="col color-2 box" style="border: thin solid grey; border-radius: 5px;">
+                                <div class="row justify-content-center" style="height: 100%; overflow-y: scroll" id="dataSetExplorer">
+                                    <h2 class="align-self-center">select & explore a dataset</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SQL OUTPUT -->
+                <div class="row" style="height: 20vh">
+                    <div class="col-10 offset-1">
+                        <div class="row" style="padding-left: 1vw; padding-right: 1vw;">
+
+                            <!-- option 1 -->
+                            <div class="col">
+                                <div class="row justify-content-center box" id="queryDisplayDiv" style="height: 19vh; border: thin solid grey; background: #ececec; padding: 5px; border-radius: 5px">
+                                    <h2 class="align-self-center">submit a question to generate an sql query</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- EVALUATE -->
+                <div class="row" id="app-prediction" style="height: 33vh">
+                    <div class="col">
+
+
+                        <div id="outputCarousel" class="carousel slide" data-ride="carousel" style="height: 100%; width: 100%; padding: 0; margin: 0">
+                            <div class="carousel-inner" style="height: 100%; width: 100%; padding: 0; margin: 0">
+
+
+                                <!-- explorer -->
+                                <div class="carousel-item active" style="height: 100%; width: 100%">
+                                    <div class="col">
+                                        <div class="row" id="output-row" style="padding-left: 1vw; padding-right: 1vw;">
+
+                                            <!-- option 1 -->
+                                            <div class="col">
+                                                <div class="row box" style="height: 29vh; border: thin solid grey; background: #ececec; padding: 5px; border-radius: 5px">
+
+                                                    <div class="col-2 offset-1">
+                                                        <div class="row" style="height: 100%; padding: 2vw 2vw 2vw 2vw;">
+                                                            <div class="col" style="background: rgba(94,177,191,0.75); border: thin solid rgb(54,106,115); border-radius: 5px;">
+                                                                <div class="row justify-content-center" style="height: 66%;">
+                                                                    <img class="align-self-center" src="{{ url_for('static', filename='img/dataset.png') }}" style="display: block; max-height:80%; width: auto; height: auto;">
+                                                                </div>
+                                                                <div class="row justify-content-center" style="height: 34%">
+                                                                    <span class="align-self-center structure-text" style="text-align: center;">select a data set</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <div class="row" style="height: 100%; padding: 2vw 2vw 2vw 2vw;">
+                                                            <div class="col">
+                                                                <div class="row justify-content-center" style="height: 100%;">
+                                                                    <img class="align-self-center" src="{{ url_for('static', filename='img/arrow-right.png') }}" style="display: block; max-height:80%; width: auto; height: auto;">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <div class="row" style="height: 100%; padding: 2vw 2vw 2vw 2vw;">
+                                                            <div class="col" style="background: rgba(223,194,125,0.75); border: thin solid #8c510a; border-radius: 5px;">
+                                                                <div class="row justify-content-center" style="height: 66%;">
+                                                                    <img class="align-self-center" src="{{ url_for('static', filename='img/logo.png') }}" style="display: block; max-height:80%; width: auto; height: auto;">
+                                                                </div>
+                                                                <div class="row justify-content-center" style="height: 34%">
+                                                                    <span class="align-self-center structure-text" style="text-align: center;">submit a question</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="row" style="height: 100%; padding: 2vw 2vw 2vw 2vw;">
+                                                            <div class="col">
+                                                                <div class="row justify-content-center" style="height: 100%;">
+                                                                    <img class="align-self-center" src="{{ url_for('static', filename='img/arrow-right.png') }}" style="display: block; max-height:80%; width: auto; height: auto;">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <div class="row" style="height: 100%; padding: 2vw 2vw 2vw 2vw;">
+                                                            <div class="col" style="background: rgba(53,151,143,0.75); border: thin solid #01665e; border-radius: 5px;">
+                                                                <div class="row justify-content-center" style="height: 66%;">
+                                                                    <img class="align-self-center" src="{{ url_for('static', filename='img/evaluate.png') }}" style="display: block; max-height:80%; width: auto; height: auto;">
+                                                                </div>
+                                                                <div class="row justify-content-center" style="height: 34%">
+                                                                    <span class="align-self-center structure-text" style="text-align: center;">generate and evaluate sql</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- evaluate -->
+                                <div class="carousel-item">
+                                    <div class="col">
+                                        <div class="row" style="padding-left: 1vw; padding-right: 1vw;">
+                                            <div class="col">
+                                                <div class="row box justify-content-center"  style="height: 29vh; border: thin solid grey; background: rgba(94,177,191,0.54); padding: 5px; border-radius: 5px">
+                                                    <div class="col">
+                                                        <div class="row justify-content-center" style="height: 30%">
+                                                            <div class="align-self-center">
+                                                                <h2 style="text-align: center">Element-wise evaluation of the sql query</h2>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="height: 35%">
+                                                            <div class="align-self-center" style="text-align: center" id ="evaluateDiv"></div>
+                                                        </div>
+                                                        <div class="row justify-content-center" style="height: 35%">
+                                                            <div class="align-self-center" style="text-align: center">
+                                                                <button type="button" class="btn btn-outline-primary btn-secondary" onclick="generateQuery()">submit feedback</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- JAVASCRIPT LIBRARIES -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/libs/bootstrap.min.js') }}"></script>
+
+        <!-- axios -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <!-- nouislider -->
+        <script src="{{ url_for('static', filename='js/libs/nouislider.js') }}"></script>
+
+        <!-- wNumb -->
+        <script src="{{ url_for('static', filename='js/libs/wNumb.js') }}"></script>
+
+
+        <!-- adding d3.js, vis.js, and viz.js-->
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+
+
+        <!-- OWN JAVASCRIPT FILES -->
+
+        <!-- MAIN -->
+        <script src="{{ url_for('static', filename='js/carousels.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/helper.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    </body>
+</html>
