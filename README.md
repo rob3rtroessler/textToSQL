@@ -1,18 +1,24 @@
 # TextToSQL
 
-## Abstract 
+## Introduction 
 
-Text-to-SQL systems are a subdomain of semantic parsing that involves converting natural 
-language (NL) into SQL queries to enable easy interaction with databases. There are many existing
-architectures that have produced impressive results for converting NL to SQL queries. However, 
-there is still much to be learned about the errors that occur in test-to-SQL systems
-and exploring uncertainty in the models. In this project, my project teammates and I intended to 
-evaluate model uncertainty and explore error detection methods for state-of-the-art text-to-SQL systems.
+The use of Structured Query Language (SQL) is crucial in working with relational databases. 
+However, the process of constructing SQL queries can be a daunting task for non-expert users, 
+who may struggle with the technicalities involved. This is where text-to-SQL models come in 
+handy, allowing users to enter queries in natural language, which are then translated into SQL. 
+In this project, we introduce a text-to-SQL model that uses a graphical user interface to make the 
+process more intuitive and improve the user experience. The model is based on the 
+state-of-the-art Spider model, which generates SQL queries from natural language input. One of 
+the key advantages of our product is its potential to leverage semi-supervised learning to 
+improve its accuracy in handling complex queries in the future. With its ability to handle 
+diverse and complex queries, our text-to-SQL model has the potential to make SQL more accessible 
+to non-expert users.
+
 
 
 ## Web App
 
-My team's text-to-SQL model is an innovative solution that allows users to enter natural language 
+Our text-to-SQL model is an innovative solution that allows users to enter natural language 
 queries through a graphical user interface (GUI), improving the user experience and making the 
 process more intuitive. The model is based on the state-of-the-art Spider model, which generates 
 SQL queries directly from natural language input using a combination of sequence-to-sequence and 
